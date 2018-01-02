@@ -1,0 +1,8 @@
+# Para todos os arquivos e sub-pastas localizados na pasta Ucontas/
+bin/
+.cache-main
+.project
+.classpath
+target/
+.settings
+

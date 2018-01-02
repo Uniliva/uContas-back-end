@@ -1,0 +1,57 @@
+@(msg: String)
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/boostrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="boostrap/css/estilo.css">
+
+    <script src="/boostrap/js/jquery-3.2.1.min.js"></script>
+    <script src="boostrap/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="titleLogin">
+            <h2>Gerenciador de contas</h2>
+<hr>
+            <h5>Controle de gasto unificado</h5>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4 boxLogin">
+                <h1 style="text-align: center">Login</h1>
+                <hr>
+                <!-- Main Form -->
+                <div class="login-form-1">
+                    <form action="/dash/home" method="post">
+                        <div class="main-login-form">
+                            <div class="login-group">
+                                <div class="form-group">
+                                    <label for="email">E-mail</label>
+                                    <input type="email" class="form-control" name="email" placeholder="e-mail">
+                                </div>
+                                <div class="form-group">
+                                    <label for="pwd">Senha</label>
+                                    <input type="password" class="form-control" name="pwd" placeholder="Senha">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block active">Logar</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- end:Main Form -->
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <hr>
+            <p style="text-align: center;">2017 - Unitec © Todos os direitos reservados</p>
+        </div>
+    </footer>
+</body>
+
+</html>
