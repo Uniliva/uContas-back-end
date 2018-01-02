@@ -2,11 +2,11 @@
 Gerenciador de Contas - Scala
 
 # Tecnologias Utilizadas
--Scala
--Scalatra
--Slick
+- Scala
+- Scalatra
+- Slick
 
 # Dados de Versão
--name := "uContas"
--scalaVersion := "2.12.3"
--ScalatraVersion = "2.6.+"
+- name := "uContas"
+- scalaVersion := "2.12.3"
+- ScalatraVersion = "2.6.+"
