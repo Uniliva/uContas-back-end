@@ -8,16 +8,15 @@ import com.unitec.model.OrcamentoEntity.Orcamento
 class HomeController() extends ScalatraServlet {
   protected implicit def executor = scala.concurrent.ExecutionContext.Implicits.global
 
-  get("/teste") {
-    val x = OrcamentoDao.findAll()
-    OrcamentoDao.save(Orcamento(0, "uai 2", 1300))
-    var t = OrcamentoDao.findById(1)
-    t.desc = "Nova descricao 22"
-    t.valor = 3000
-    
-    OrcamentoDao.update(t)
-
-    println("Depois \n" + t)
+  get("/login") {
+    views.html.vlogin.login("Teste");
   }
 
+
+  get("/dash/home") {
+    views.html.dashboard.dash()
+  }
+  post("/dash/home") {
+    views.html.dashboard.dash()
+  }
 }

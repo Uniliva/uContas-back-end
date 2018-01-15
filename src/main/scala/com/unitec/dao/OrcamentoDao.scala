@@ -9,6 +9,8 @@ import com.unitec.model.OrcamentoEntity.OrcamentoMembros
 import com.unitec.model.OrcamentoEntity.Orcamentos
 
 import slick.jdbc.MySQLProfile.api._
+import br.com.devQueijo.model.Membro
+import br.com.devQueijo.model.Membro.Membro
 
 object OrcamentoDao extends GenericDao[Orcamento] {
 
@@ -46,11 +48,14 @@ object OrcamentoDao extends GenericDao[Orcamento] {
   }
 
   def RemoveMembro(obj: OrcamentoMembro): Unit = {
-    val action = tbOrcamemtoMembro.filter(t => t.orcamentoFK === obj.idOrcamento && t.membroFK === obj.idMembro).delete
-    
-        
+    val action = tbOrcamemtoMembro.filter(t => t.orcamentoFK === obj.idOrcamento && t.membroFK === obj.idMembro).delete        
     val result = db.run(action)
     Await.result(result, Duration.Inf)
   }
+  
+  /* def findMembros(obj: Orcamento): List<Membro> = {
+    val action =  tbOrcamemtoMembro.filter(orcamentoFK == obj.id).result
+    Await.result(result, Duration.Inf).toList.head
+  }*/
 
 }
