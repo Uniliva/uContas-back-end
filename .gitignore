@@ -5,5 +5,5 @@ bin/
 .classpath
 target/
 .settings
-.idea
+.idea/
 
