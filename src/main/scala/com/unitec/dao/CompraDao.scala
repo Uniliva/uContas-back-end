@@ -15,6 +15,8 @@ import slick.jdbc.MySQLProfile.api.streamableQueryActionExtensionMethods
 import slick.jdbc.MySQLProfile.api.valueToConstColumn
 import br.com.devQueijo.model.Compra.Compra
 import br.com.devQueijo.model.Compra.Compras
+import slick.dbio.DBIOAction
+import slick.jdbc.MySQLProfile.api._
 
 object CompraDao extends GenericDao[Compra] {
 
@@ -37,12 +39,18 @@ object CompraDao extends GenericDao[Compra] {
     val result = db.run(action)
     Await.result(result, Duration.Inf)
   }
-  
-  
+
   def update(obj: Compra): Unit = {
     val action = tb.filter(_.id === obj.id).update(obj)
     val result = db.run(action)
     Await.result(result, Duration.Inf)
+  }
+
+  def createTable(): Unit = {
+    db.run(DBIOAction.seq(tb.schema.create))
+  }
+  def dropTable(): Unit = {
+    db.run(DBIOAction.seq(tb.schema.drop))
   }
 
 }

@@ -1,12 +1,12 @@
 package com.unitec.dao
 
 import com.unitec.util.BaseUtil
-
 import slick.jdbc.MySQLProfile.api._
 import com.unitec.model.BaseEntity
 import scala.concurrent.Await
 import scala.concurrent.duration.Duration
 import com.unitec.model.BaseTables
+import slick.dbio.DBIOAction
 
 abstract class GenericDao[T <: BaseEntity]() {
   protected implicit def executor = scala.concurrent.ExecutionContext.Implicits.global
@@ -22,9 +22,12 @@ abstract class GenericDao[T <: BaseEntity]() {
     //obriga a future a executar
     Await.result(resp, Duration.Inf).toList.asInstanceOf[List[T]]
   }
-  
-  def save (obj:T):Unit
+
+  def save(obj: T): Unit
 
   def findById(idx: Long): T
+
+  def createTable()
+  def dropTable()
 
 }

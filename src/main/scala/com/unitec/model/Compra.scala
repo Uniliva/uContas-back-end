@@ -28,5 +28,4 @@ class Compras (tag:Tag) extends BaseTables[Compra](tag,"COMPRAS"){
   }
 
 
-
 }

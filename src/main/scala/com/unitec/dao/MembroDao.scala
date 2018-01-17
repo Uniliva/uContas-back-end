@@ -14,6 +14,9 @@ import slick.jdbc.MySQLProfile.api.queryUpdateActionExtensionMethods
 import slick.jdbc.MySQLProfile.api.streamableQueryActionExtensionMethods
 import slick.jdbc.MySQLProfile.api.valueToConstColumn
 
+import slick.jdbc.MySQLProfile.api._
+import slick.dbio.DBIOAction
+
 object MembroDao extends GenericDao[Membro] {
 
   implicit val tb = TableQuery[Membros]
@@ -35,12 +38,17 @@ object MembroDao extends GenericDao[Membro] {
     val result = db.run(action)
     Await.result(result, Duration.Inf)
   }
-  
-  
+
   def update(obj: Membro): Unit = {
     val action = tb.filter(_.id === obj.id).update(obj)
     val result = db.run(action)
     Await.result(result, Duration.Inf)
   }
 
+  def createTable(): Unit = {
+    db.run(DBIOAction.seq(tb.schema.create))
+  }
+  def dropTable(): Unit = {
+    db.run(DBIOAction.seq(tb.schema.drop))
+  }
 }

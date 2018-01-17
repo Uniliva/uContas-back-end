@@ -10,13 +10,14 @@ import slick.lifted.Tag
 import com.unitec.model.BaseEntity
 
 object Membro {
-  case class Membro(id: Long , var nome: String, var cpf: String,var sexo: String) extends BaseEntity
+  case class Membro(id: Long , var nome: String, var cpf: String,var sexo: String,var senha:String) extends BaseEntity
   //mapeamento
   class Membros(tag: Tag) extends BaseTables[Membro](tag, "MEMBROS") {
     def nome = column[String]("NOME")
     def cpf = column[String]("CPF")
     def sexo = column[String]("SEXO")
-    def * = (id, nome, cpf, sexo) <> (Membro.tupled, Membro.unapply)
+     def senha = column[String]("SENHA")
+    def * = (id, nome, cpf, sexo,senha) <> (Membro.tupled, Membro.unapply)
   }
 
 }
