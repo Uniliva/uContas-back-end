@@ -14,6 +14,7 @@ import br.com.devQueijo.model.Membro.Membro
 
 import slick.jdbc.MySQLProfile.api._
 import slick.dbio.DBIOAction
+import scala.tools.nsc.interpreter.Results.Result
 
 object OrcamentoDao extends GenericDao[Orcamento] {
 
@@ -62,10 +63,22 @@ object OrcamentoDao extends GenericDao[Orcamento] {
   }*/
 
   def createTable(): Unit = {
-    db.run(DBIOAction.seq(tb.schema.create))
+    val result = db.run(DBIOAction.seq(tb.schema.create))
+    Await.result(result, Duration.Inf)
   }
+
   def dropTable(): Unit = {
-    db.run(DBIOAction.seq(tb.schema.drop))
+    val result = db.run(DBIOAction.seq(tb.schema.drop))
+    Await.result(result, Duration.Inf)
+  }
+  def createTableM(): Unit = {
+    val result = db.run(DBIOAction.seq(tbOrcamemtoMembro.schema.create))
+    Await.result(result, Duration.Inf)
+  }
+
+  def dropTableM(): Unit = {
+    val result = db.run(DBIOAction.seq(tbOrcamemtoMembro.schema.drop))
+    Await.result(result, Duration.Inf)
   }
 
 }

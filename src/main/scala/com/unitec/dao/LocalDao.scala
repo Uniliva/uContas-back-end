@@ -38,20 +38,20 @@ object LocalDao extends GenericDao[Local] {
     val result = db.run(action)
     Await.result(result, Duration.Inf)
   }
-  
-  
+
   def update(obj: Local): Unit = {
     val action = tb.filter(_.id === obj.id).update(obj)
     val result = db.run(action)
     Await.result(result, Duration.Inf)
   }
-  
 
   def createTable(): Unit = {
-    db.run(DBIOAction.seq(tb.schema.create))
+    val result = db.run(DBIOAction.seq(tb.schema.create))
+    Await.result(result, Duration.Inf)
   }
   def dropTable(): Unit = {
-    db.run(DBIOAction.seq(tb.schema.drop))
+    val result = db.run(DBIOAction.seq(tb.schema.drop))
+    Await.result(result, Duration.Inf)
   }
 
 }

@@ -46,9 +46,11 @@ object MembroDao extends GenericDao[Membro] {
   }
 
   def createTable(): Unit = {
-    db.run(DBIOAction.seq(tb.schema.create))
+    val result = db.run(DBIOAction.seq(tb.schema.create))
+    Await.result(result, Duration.Inf)
   }
   def dropTable(): Unit = {
-    db.run(DBIOAction.seq(tb.schema.drop))
+    val result = db.run(DBIOAction.seq(tb.schema.drop))
+    Await.result(result, Duration.Inf)
   }
 }

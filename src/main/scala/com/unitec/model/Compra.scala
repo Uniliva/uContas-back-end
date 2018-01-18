@@ -5,8 +5,10 @@ import com.unitec.model.Local.Locais
 import com.unitec.model.OrcamentoEntity.Orcamentos
 
 import br.com.devQueijo.model.Membro.Membros
-//import slick.jdbc.H2Profile.api._
 import slick.jdbc.MySQLProfile.api._
+import br.com.devQueijo.model.Membro.Membros
+import br.com.devQueijo.model.Membro.Membros
+import com.unitec.model.OrcamentoEntity.Orcamentos
 
 object Compra {
   
@@ -15,16 +17,16 @@ case class Compra(id:Long,var descricao: String,var valor: Double,var localID: L
 class Compras (tag:Tag) extends BaseTables[Compra](tag,"COMPRAS"){
       def descricao = column[String]("DESCRICAO")
       def valor = column[Double]("VALOR")
-      def localFK = column[Long]("LOCAL_ID")
-      def membroFK = column[Long]("MEMBRO_ID")
-      def OrcamentoFK = column[Long]("ORCAMENTO_ID")
+      def localID = column[Long]("LOCAL_ID")
+      def membroID = column[Long]("MEMBRO_ID")
+      def OrcamentoID = column[Long]("ORCAMENTO_ID")
       
       //foreign Key
-      def fk1 = foreignKey("LOCAL_FK", localFK, TableQuery[Locais])(_.id, onUpdate=ForeignKeyAction.NoAction, onDelete=ForeignKeyAction.NoAction)
-      def fk2 = foreignKey("MEMBRO_FK", localFK, TableQuery[Membros])(_.id, onUpdate=ForeignKeyAction.NoAction, onDelete=ForeignKeyAction.NoAction)
-      def fk3 = foreignKey("ORCAMENTO_FK", localFK, TableQuery[Orcamentos])(_.id, onUpdate=ForeignKeyAction.NoAction, onDelete=ForeignKeyAction.NoAction)
+      def localFK = foreignKey("LOCAL_FK_2", localID, TableQuery[Locais])(_.id, onUpdate=ForeignKeyAction.NoAction, onDelete=ForeignKeyAction.NoAction)
+      def membroFK = foreignKey("MEMBRO_FK_2", membroID, TableQuery[Membros])(_.id, onUpdate=ForeignKeyAction.NoAction, onDelete=ForeignKeyAction.NoAction)
+      def orcamentoFK = foreignKey("ORCAMENTO_FK_2", OrcamentoID, TableQuery[Orcamentos])(_.id, onUpdate=ForeignKeyAction.NoAction, onDelete=ForeignKeyAction.NoAction)
       
-      def * =(id,descricao,valor,localFK,membroFK,OrcamentoFK) <> (Compra.tupled,Compra.unapply)
+      def * =(id,descricao,valor,localID,membroID,OrcamentoID) <> (Compra.tupled,Compra.unapply)
   }
 
 
