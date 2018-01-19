@@ -1,7 +1,5 @@
-package br.com.devQueijo.model
+package com.unitec.model
 
-import com.unitec.model.BaseEntity
-import com.unitec.model.BaseTables
 
 import slick.jdbc.MySQLProfile.api.anyToShapedValue
 import slick.jdbc.MySQLProfile.api.longColumnType

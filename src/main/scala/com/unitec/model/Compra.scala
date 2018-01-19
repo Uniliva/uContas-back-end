@@ -1,14 +1,11 @@
-package br.com.devQueijo.model
-import com.unitec.model.BaseEntity
-import com.unitec.model.BaseTables
+package com.unitec.model
+
+
 import com.unitec.model.Local.Locais
+import com.unitec.model.Membro.Membros
 import com.unitec.model.OrcamentoEntity.Orcamentos
 
-import br.com.devQueijo.model.Membro.Membros
 import slick.jdbc.MySQLProfile.api._
-import br.com.devQueijo.model.Membro.Membros
-import br.com.devQueijo.model.Membro.Membros
-import com.unitec.model.OrcamentoEntity.Orcamentos
 
 object Compra {
   

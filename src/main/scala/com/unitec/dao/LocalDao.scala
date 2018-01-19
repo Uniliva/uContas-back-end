@@ -3,17 +3,8 @@ package com.unitec.dao
 import scala.concurrent.Await
 import scala.concurrent.duration.Duration
 
-import com.unitec.model.Local.Locais
-import com.unitec.model.Local.Local
+import com.unitec.model.Local.{Locais,Local}
 
-import slick.jdbc.MySQLProfile.api.TableQuery
-import slick.jdbc.MySQLProfile.api.columnExtensionMethods
-import slick.jdbc.MySQLProfile.api.longColumnType
-import slick.jdbc.MySQLProfile.api.queryDeleteActionExtensionMethods
-import slick.jdbc.MySQLProfile.api.queryInsertActionExtensionMethods
-import slick.jdbc.MySQLProfile.api.queryUpdateActionExtensionMethods
-import slick.jdbc.MySQLProfile.api.streamableQueryActionExtensionMethods
-import slick.jdbc.MySQLProfile.api.valueToConstColumn
 import slick.jdbc.MySQLProfile.api._
 import slick.dbio.DBIOAction
 

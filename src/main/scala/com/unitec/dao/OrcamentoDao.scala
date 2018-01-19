@@ -9,8 +9,6 @@ import com.unitec.model.OrcamentoEntity.OrcamentoMembros
 import com.unitec.model.OrcamentoEntity.Orcamentos
 
 import slick.jdbc.MySQLProfile.api._
-import br.com.devQueijo.model.Membro
-import br.com.devQueijo.model.Membro.Membro
 
 import slick.jdbc.MySQLProfile.api._
 import slick.dbio.DBIOAction

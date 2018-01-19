@@ -11,12 +11,12 @@ object BaseUtil {
   private var instancia: Database = _
 
   def conection() = {
-    logger.info(": - Nova Conecção Criada!")
+    logger.info(": - Nova Conecção com o banco Criada!")
     instancia = Database.forDataSource(cpds, None)
     instancia
   }
   def getInstance:Database= {
-    logger.info(": - Nova Instancia gerada")
+    logger.info(": - Nova Instancia do banco gerada")
     instancia match {
       case _ => conection()
     }

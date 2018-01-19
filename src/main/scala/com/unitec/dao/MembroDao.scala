@@ -3,21 +3,14 @@ package com.unitec.dao
 import scala.concurrent.Await
 import scala.concurrent.duration.Duration
 
-import br.com.devQueijo.model.Membro.Membro
-import br.com.devQueijo.model.Membro.Membros
-import slick.jdbc.MySQLProfile.api.TableQuery
-import slick.jdbc.MySQLProfile.api.columnExtensionMethods
-import slick.jdbc.MySQLProfile.api.longColumnType
-import slick.jdbc.MySQLProfile.api.queryDeleteActionExtensionMethods
-import slick.jdbc.MySQLProfile.api.queryInsertActionExtensionMethods
-import slick.jdbc.MySQLProfile.api.queryUpdateActionExtensionMethods
-import slick.jdbc.MySQLProfile.api.streamableQueryActionExtensionMethods
-import slick.jdbc.MySQLProfile.api.valueToConstColumn
-
-import slick.jdbc.MySQLProfile.api._
 import slick.dbio.DBIOAction
+import slick.jdbc.MySQLProfile.api._
+import com.unitec.model.Membro.{ Membro, Membros }
+import org.slf4j.LoggerFactory
 
 object MembroDao extends GenericDao[Membro] {
+
+  val logger = LoggerFactory.getLogger(getClass)
 
   implicit val tb = TableQuery[Membros]
 
@@ -25,6 +18,17 @@ object MembroDao extends GenericDao[Membro] {
     val action = tb.filter(_.id === idx).result
     val result = db.run(action)
     Await.result(result, Duration.Inf).toList.head
+  }
+  def findByEmail(email: String): Membro = {
+    val action = tb.filter(_.email === email).result
+    val result = db.run(action)
+    Await.result(result, Duration.Inf).toList.head
+  }
+
+  def eValido(email: String, senha: String): Boolean = {
+    val action = tb.filter(x => {x.email === email && x.senha === senha}).result
+    val result = db.run(action)
+    Await.result(result, Duration.Inf).toList.size > 0
   }
 
   def save(obj: Membro): Unit = {

@@ -2,8 +2,7 @@ package com.unitec.model
 
 import slick.jdbc.MySQLProfile.api._
 import slick.lifted.Tag
-import br.com.devQueijo.model.Membro.Membros
-import br.com.devQueijo.model.Membro.Membros
+import com.unitec.model.Membro.Membros
 
 object OrcamentoEntity {
   case class Orcamento(id: Long, var desc: String, var valor: Double) extends BaseEntity
@@ -20,8 +19,8 @@ object OrcamentoEntity {
 
   class OrcamentoMembros(tag: Tag) extends Table[OrcamentoMembro](tag, "ORCAMENTO_MEMBROS") {
     //Atributos da tabela
-    def orcamentoFK = column[Long]("ORCAMNRTO_ID")
-    def membroFK = column[Long]("MEMEBRO_ID")
+    def orcamentoFK = column[Long]("ORCAMENTO_ID")
+    def membroFK = column[Long]("MEMBRO_ID")
     //primary key
     def pk = primaryKey("PK_PARTICIPANTES", (orcamentoFK, membroFK))
     def * = (orcamentoFK, membroFK) <> (OrcamentoMembro.tupled, OrcamentoMembro.unapply)
