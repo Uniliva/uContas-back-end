@@ -25,7 +25,7 @@ object MembroDao extends GenericDao[Membro] {
     Await.result(result, Duration.Inf).toList.head
   }
 
-  def eValido(email: String, senha: String): Boolean = {
+  def isValido(email: String, senha: String): Boolean = {
     val action = tb.filter(x => {x.email === email && x.senha === senha}).result
     val result = db.run(action)
     Await.result(result, Duration.Inf).toList.size > 0

@@ -11,27 +11,21 @@ import org.json4s.jackson.JsonMethods._
 
 import org.scalatra._
 import org.scalatra.scalate.ScalateSupport
+import org.scalatra.json.JacksonJsonSupport
 
-class HomeController() extends ScalatraServlet with ScalateSupport {
+class HomeController() extends ScalatraServlet with JacksonJsonSupport {
   protected implicit def executor = scala.concurrent.ExecutionContext.Implicits.global
-  
   val logger = LoggerFactory.getLogger(getClass)
-  
-  implicit val formats = DefaultFormats
-  
-  post("/valida") {
-    val email = params("email")
-    val senha = params("senha")
-    logger.warn("Buscando usuario valido!")
-    val valido = MembroService.ehMembroValido(email, senha)
-    Validador(email, senha, valido)
+  protected implicit lazy val jsonFormats: Formats = DefaultFormats.withBigDecimal
+
+  before() {
+    contentType = formats("json")
   }
 
-  post("/teste") {
-    val juser = parse(request.body)
-    println(juser)
-    val u = juser.extract[user]
-    println("--"+u)
+  post("/valida") {
+    logger.warn("Validando usuario!")
+    val usuario = parse(request.body).extract[Usuario]
+    usuario.copy(isValido=MembroService.isMembroValido(usuario) )
   }
 
   get("/createTables") {
@@ -44,9 +38,6 @@ class HomeController() extends ScalatraServlet with ScalateSupport {
     "tabelas criadas"
   }
 
-  case class Validador(email: String, senha: String, valido: Boolean = false)
-  case class user(email: String, senha: String)
-
 }
 
-
+case class Usuario(email: String, senha: String, val isValido:Boolean =false)
