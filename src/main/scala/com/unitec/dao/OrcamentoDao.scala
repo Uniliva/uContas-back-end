@@ -12,7 +12,6 @@ import slick.jdbc.MySQLProfile.api._
 
 import slick.jdbc.MySQLProfile.api._
 import slick.dbio.DBIOAction
-import scala.tools.nsc.interpreter.Results.Result
 
 object OrcamentoDao extends GenericDao[Orcamento] {
 

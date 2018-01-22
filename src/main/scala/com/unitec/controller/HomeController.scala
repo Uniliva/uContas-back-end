@@ -1,25 +1,24 @@
 package com.unitec.controller
 
-
 import com.unitec.dao.{ OrcamentoDao, CompraDao, LocalDao, MembroDao }
 import com.unitec.model.OrcamentoEntity.Orcamento
+import com.unitec.service.MembroService
+
 import org.slf4j.LoggerFactory
 
-import org.json4s.{ DefaultFormats, Formats }
-import org.scalatra.json._
-import com.unitec.service.MembroService
+import org.json4s._
+import org.json4s.jackson.JsonMethods._
+
 import org.scalatra._
 import org.scalatra.scalate.ScalateSupport
 
-class HomeController() extends ScalatraServlet with JacksonJsonSupport with ScalateSupport {
+class HomeController() extends ScalatraServlet with ScalateSupport {
   protected implicit def executor = scala.concurrent.ExecutionContext.Implicits.global
+  
   val logger = LoggerFactory.getLogger(getClass)
-  protected implicit lazy val jsonFormats: Formats = DefaultFormats.withBigDecimal
-
-  before() {
-    contentType = formats("json")
-  }
-
+  
+  implicit val formats = DefaultFormats
+  
   post("/valida") {
     val email = params("email")
     val senha = params("senha")
@@ -29,7 +28,10 @@ class HomeController() extends ScalatraServlet with JacksonJsonSupport with Scal
   }
 
   post("/teste") {
-params("email")
+    val juser = parse(request.body)
+    println(juser)
+    val u = juser.extract[user]
+    println("--"+u)
   }
 
   get("/createTables") {
@@ -43,6 +45,7 @@ params("email")
   }
 
   case class Validador(email: String, senha: String, valido: Boolean = false)
+  case class user(email: String, senha: String)
 
 }
 
