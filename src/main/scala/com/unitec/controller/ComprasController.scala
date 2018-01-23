@@ -12,12 +12,12 @@ import com.unitec.model.Mensagens
 class ComprasController extends ScalatraServlet {
   implicit val formats = Serialization.formats(NoTypeHints)
   get("/all") {
-    write(ComprasService.getCompras())
+    write(ComprasService.getAll())
   }
 
   get("/busca/:id") {
     val id = params("id")
-    ComprasService.getCompraPorId(id.toLong) match {
+    ComprasService.getPorId(id.toLong) match {
       case Some(e) => write(e)
       case None => write(Mensagens("INFO","Compra não encontrada"))
     }
@@ -25,21 +25,21 @@ class ComprasController extends ScalatraServlet {
 
   post("/new") {
     val compra = read[Compra](request.body)
-    val result = ComprasService.setCompra(compra)
+    val result = ComprasService.save(compra)
     if (result) write(Mensagens("INFO", "Compra Cadastrada com sucesso"))
     else write(Mensagens("ERROR", "Erro ao cadastrar compra"))
   }
 
   delete("/remove/:id") {
     val id = params("id")
-    val result = ComprasService.deleteCompra(id.toLong)
+    val result = ComprasService.delete(id.toLong)
     if (result) write(Mensagens("INFO", "Compra deletada com sucesso"))
     else write(Mensagens("ERROR", "Erro ao deletar compra"))
   }
 
   post("/update") {
     val compra = read[Compra](request.body)
-    val result = ComprasService.updateCompra(compra)
+    val result = ComprasService.update(compra)
     if (result) write(Mensagens("INFO", "Compra Atualizada com sucesso"))
     else write(Mensagens("ERROR", "Erro ao atualizar compra"))
   }
