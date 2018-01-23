@@ -12,35 +12,13 @@ import slick.jdbc.MySQLProfile.api._
 
 import slick.jdbc.MySQLProfile.api._
 import slick.dbio.DBIOAction
+import com.unitec.model.OrcamentoEntity.Orcamentos
 
-object OrcamentoDao extends GenericDao[Orcamento] {
+object OrcamentoDao extends GenericDao[Orcamento,Orcamentos](TableQuery[Orcamentos]) {
 
   implicit val tb = TableQuery[Orcamentos]
   val tbOrcamemtoMembro = TableQuery[OrcamentoMembros]
-
-  def findById(idx: Long): Orcamento = {
-    val action = tb.filter(_.id === idx).result
-    val result = db.run(action)
-    Await.result(result, Duration.Inf).toList.head
-  }
-
-  def save(obj: Orcamento): Unit = {
-    val action = tb += obj
-    val result = db.run(action)
-    Await.result(result, Duration.Inf)
-  }
-
-  def delete(obj: Orcamento): Unit = {
-    val action = tb.filter(_.id === obj.id).delete
-    val result = db.run(action)
-    Await.result(result, Duration.Inf)
-  }
-
-  def update(obj: Orcamento): Unit = {
-    val action = tb.filter(_.id === obj.id).update(obj)
-    val result = db.run(action)
-    Await.result(result, Duration.Inf)
-  }
+  
 
   def AdicionaMembro(obj: OrcamentoMembro): Unit = {
     val action = tbOrcamemtoMembro += obj
@@ -53,21 +31,7 @@ object OrcamentoDao extends GenericDao[Orcamento] {
     val result = db.run(action)
     Await.result(result, Duration.Inf)
   }
-
-  /* def findMembros(obj: Orcamento): List<Membro> = {
-    val action =  tbOrcamemtoMembro.filter(orcamentoFK == obj.id).result
-    Await.result(result, Duration.Inf).toList.head
-  }*/
-
-  def createTable(): Unit = {
-    val result = db.run(DBIOAction.seq(tb.schema.create))
-    Await.result(result, Duration.Inf)
-  }
-
-  def dropTable(): Unit = {
-    val result = db.run(DBIOAction.seq(tb.schema.drop))
-    Await.result(result, Duration.Inf)
-  }
+  
   def createTableM(): Unit = {
     val result = db.run(DBIOAction.seq(tbOrcamemtoMembro.schema.create))
     Await.result(result, Duration.Inf)
