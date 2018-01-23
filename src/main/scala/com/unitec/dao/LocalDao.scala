@@ -3,7 +3,7 @@ package com.unitec.dao
 import scala.concurrent.Await
 import scala.concurrent.duration.Duration
 
-import com.unitec.model.Local.{Locais,Local}
+import com.unitec.model.Local.{ Locais, Local }
 
 import slick.jdbc.MySQLProfile.api._
 import slick.dbio.DBIOAction
@@ -12,28 +12,43 @@ object LocalDao extends GenericDao[Local] {
 
   implicit val tb = TableQuery[Locais]
 
-  def findById(idx: Long): Local = {
+  def findById(idx: Long): Option[Local] = {
     val action = tb.filter(_.id === idx).result
     val result = db.run(action)
-    Await.result(result, Duration.Inf).toList.head
+    Await.result(result, Duration.Inf).toList.headOption
   }
 
-  def save(obj: Local): Unit = {
-    val action = tb += obj
-    val result = db.run(action)
-    Await.result(result, Duration.Inf)
+  def save(obj: Local): Boolean = {
+    try {
+      val action = tb += obj
+      val result = db.run(action)
+      Await.result(result, Duration.Inf)
+      true
+    } catch {
+      case e: Exception => false
+    }
   }
 
-  def delete(obj: Local): Unit = {
-    val action = tb.filter(_.id === obj.id).delete
-    val result = db.run(action)
-    Await.result(result, Duration.Inf)
+  def delete(id: Long): Boolean = {
+    try {
+      val action = tb.filter(_.id === id).delete
+      val result = db.run(action)
+      Await.result(result, Duration.Inf)
+      true
+    } catch {
+      case e: Exception => false
+    }
   }
 
-  def update(obj: Local): Unit = {
-    val action = tb.filter(_.id === obj.id).update(obj)
-    val result = db.run(action)
-    Await.result(result, Duration.Inf)
+  def update(obj: Local): Boolean = {
+    try {
+      val action = tb.filter(_.id === obj.id).update(obj)
+      val result = db.run(action)
+      Await.result(result, Duration.Inf)
+      true
+    } catch {
+      case e: Exception => false
+    }
   }
 
   def createTable(): Unit = {

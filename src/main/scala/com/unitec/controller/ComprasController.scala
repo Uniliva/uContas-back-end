@@ -8,7 +8,6 @@ import org.json4s.native.Serialization
 import com.unitec.service.ComprasService
 import com.unitec.model.Compra.Compra
 import com.unitec.model.Mensagens
-import org.scalatra.MethodOverride
 
 class ComprasController extends ScalatraServlet {
   implicit val formats = Serialization.formats(NoTypeHints)
