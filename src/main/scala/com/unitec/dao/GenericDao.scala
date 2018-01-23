@@ -23,10 +23,6 @@ abstract class GenericDao[T <: BaseEntity]() {
     Await.result(resp, Duration.Inf).toList.asInstanceOf[List[T]]
   }
 
-  def save(obj: T): Unit
-
-  def findById(idx: Long): T
-
   def createTable()
   def dropTable()
 

@@ -8,25 +8,25 @@ import org.slf4j.LoggerFactory
 
 import org.json4s._
 import org.json4s.jackson.JsonMethods._
+import org.json4s.native.Serialization.{ read, write }
+import org.json4s.native.Serialization
 
 import org.scalatra._
 import org.scalatra.scalate.ScalateSupport
-import org.scalatra.json.JacksonJsonSupport
 
-class HomeController() extends ScalatraServlet with JacksonJsonSupport {
+class HomeController() extends ScalatraServlet {
   protected implicit def executor = scala.concurrent.ExecutionContext.Implicits.global
   val logger = LoggerFactory.getLogger(getClass)
   protected implicit lazy val jsonFormats: Formats = DefaultFormats.withBigDecimal
 
-  before() {
-    contentType = formats("json")
-  }
-
+  implicit val formats = Serialization.formats(NoTypeHints)
+  
   post("/valida") {
     logger.warn("Validando usuario!")
     val usuario = parse(request.body).extract[Usuario]
-    usuario.copy(isValido=MembroService.isMembroValido(usuario) )
+    write(usuario.copy(isValido = MembroService.isMembroValido(usuario)))
   }
+
 
   get("/createTables") {
     logger.warn("Criando tablelas no banco de dados! -")
@@ -40,4 +40,4 @@ class HomeController() extends ScalatraServlet with JacksonJsonSupport {
 
 }
 
-case class Usuario(email: String, senha: String, val isValido:Boolean =false)
+case class Usuario(email: String, senha: String, val isValido: Boolean = false)
