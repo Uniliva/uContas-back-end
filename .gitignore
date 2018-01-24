@@ -26,3 +26,4 @@ org.scala-ide.sdt.update-site/site.xml`
 *.ipr
 *.iws
 .idea
+/bin/

@@ -1,9 +1,10 @@
 organization := "com.unitec"
 name := "uContas"
-version := "0.1.0-SNAPSHOT"
+version := "1.0"
 scalaVersion := "2.12.3"
 
 val ScalatraVersion = "2.6.+"
+
 
 
 resolvers += Classpaths.typesafeReleases
@@ -22,12 +23,13 @@ libraryDependencies ++= Seq(
   "org.specs2"				%% "specs2-junit"	   % "4.0.1" 			% Test,
   "org.json4s"   			%% "json4s-jackson"    % "3.5.2",
   "org.scalatra"            %% "scalatra-json"     % ScalatraVersion,
-  "org.json4s"              %% "json4s-native"     % "3.5.2"
+  "org.json4s"              %% "json4s-native"     % "3.5.2",
+  "org.eclipse.jetty" % "jetty-webapp" % "9.1.5.v20140505" % "compile;container",
+  "org.eclipse.jetty" % "jetty-plus" % "9.1.5.v20140505" % "compile;container",
   
 )
 
-libraryDependencies ++= Seq("org.slf4j" % "slf4j-api" % "1.7.5",
-                            "org.slf4j" % "slf4j-simple" % "1.7.5")
+libraryDependencies ++= Seq("org.slf4j" % "slf4j-api" % "1.7.5", "org.slf4j" % "slf4j-simple" % "1.7.5")
                            
 
 

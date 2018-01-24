@@ -1,0 +1,1 @@
+web: target/universal/stage/bin/ucontas_2.12-1.0 -Dhttp.port=$PORT -Dother.prop=someValue

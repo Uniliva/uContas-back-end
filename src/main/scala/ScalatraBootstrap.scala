@@ -19,6 +19,7 @@ class ScalatraBootstrap extends LifeCycle {
     context.mount(new MembroController, "/membros")
     context.mount(new OrcamentoController, "/orcamentos") 
     context.mount(new HomeController, "/*")
+    
   }
 
   override def destroy(context: ServletContext) {
