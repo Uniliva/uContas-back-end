@@ -1,5 +1,0 @@
-[0m[[0m[0mdebug[0m] [0m[0mCopy resource mappings: [0m
-[0m[[0m[0mdebug[0m] [0m[0m	(C:\Documentos\Scala\workspace\Projeto uContas\ucontas-back-end\src\main\resources\c3p0.properties,C:\Documentos\Scala\workspace\Projeto uContas\ucontas-back-end\target\scala-2.12\classes\c3p0.properties)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	(C:\Documentos\Scala\workspace\Projeto uContas\ucontas-back-end\src\main\resources\logback.xml,C:\Documentos\Scala\workspace\Projeto uContas\ucontas-back-end\target\scala-2.12\classes\logback.xml)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	(C:\Documentos\Scala\workspace\Projeto uContas\ucontas-back-end\src\main\resources\rebel.xml,C:\Documentos\Scala\workspace\Projeto uContas\ucontas-back-end\target\scala-2.12\classes\rebel.xml)[0m
-[0m[[0m[0mdebug[0m] [0m[0m	(C:\Documentos\Scala\workspace\Projeto uContas\ucontas-back-end\src\main\resources\specs2-junit_2.12-4.0.1.jar,C:\Documentos\Scala\workspace\Projeto uContas\ucontas-back-end\target\scala-2.12\classes\specs2-junit_2.12-4.0.1.jar)[0m

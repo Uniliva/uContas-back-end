@@ -240,3 +240,6 @@ exit
 exit
 ~jetty:start
 exit
+stage
+clean
+exit

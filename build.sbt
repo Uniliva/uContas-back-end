@@ -36,3 +36,5 @@ enablePlugins(ScalatraPlugin)
 
 enablePlugins(JettyPlugin)
 containerPort in Jetty := 8070
+
+enablePlugins(JavaAppPackaging)
