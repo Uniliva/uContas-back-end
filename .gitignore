@@ -1,8 +1,28 @@
 # Para todos os arquivos e sub-pastas localizados na pasta Ucontas/
-bin/
-.cache-main
+
+# sbt specific
+.cache/
+.history/
+.lib/
+dist/*
+target/
+lib_managed/
+src_managed/
+project/boot/
+project/plugins/project/
+
+# eclipse
+build
 .classpath
+.project
 .settings
-.idea/
+org.scala-ide.sdt.core/META-INF/MANIFEST.MF
+org.scala-ide.sdt.update-site/site.xml`
 
 
+# IntelliJ 
+
+*.iml
+*.ipr
+*.iws
+.idea
