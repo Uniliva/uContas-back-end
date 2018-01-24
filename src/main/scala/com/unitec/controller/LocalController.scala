@@ -40,8 +40,8 @@ class LocalController extends ScalatraServlet {
   }
 
   post("/update") {
-    val compra = read[Local](request.body)
-    val result = LocalService.update(compra)
+    val local = read[Local](request.body)
+    val result = LocalService.update(local)
     if (result) write(Mensagens("INFO", "Local Atualizada com sucesso"))
     else write(Mensagens("ERROR", "Erro ao atualizar local"))
   }
