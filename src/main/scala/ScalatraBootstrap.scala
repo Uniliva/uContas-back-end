@@ -14,11 +14,11 @@ class ScalatraBootstrap extends LifeCycle {
 
   override def init(context: ServletContext) {
     BaseUtil.conection()
-    context.mount(new HomeController, "/login")
     context.mount(new ComprasController, "/compras")
     context.mount(new LocalController, "/locais")
     context.mount(new MembroController, "/membros")
-    context.mount(new OrcamentoController, "/orcamentos")
+    context.mount(new OrcamentoController, "/orcamentos") 
+    context.mount(new HomeController, "/*")
   }
 
   override def destroy(context: ServletContext) {
