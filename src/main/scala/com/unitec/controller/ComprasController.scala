@@ -8,9 +8,18 @@ import org.json4s.native.Serialization
 import com.unitec.service.ComprasService
 import com.unitec.model.Compra.Compra
 import com.unitec.model.Mensagens
+import org.scalatra.CorsSupport
+import org.slf4j.LoggerFactory
 
-class ComprasController extends ScalatraServlet {
+class ComprasController extends ScalatraServlet with CorsSupport {
   implicit val formats = Serialization.formats(NoTypeHints)
+  val logger = LoggerFactory.getLogger(getClass)
+  
+  options("/*") {
+    logger.warn("------------ response -------------" + response)
+    response.setHeader("Access-Control-Allow-Headers", request.getHeader("Access-Control-Request-Headers"))
+  }
+
   get("/all") {
     write(ComprasService.getAll())
   }
@@ -19,7 +28,7 @@ class ComprasController extends ScalatraServlet {
     val id = params("id")
     ComprasService.getPorId(id.toLong) match {
       case Some(e) => write(e)
-      case None => write(Mensagens("INFO","Compra não encontrada"))
+      case None    => write(Mensagens("INFO", "Compra não encontrada"))
     }
   }
 
