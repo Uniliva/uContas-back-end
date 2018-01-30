@@ -15,11 +15,8 @@ class ScalatraBootstrap extends LifeCycle {
     context.mount(new MembroController, "/membros/*")
     context.mount(new OrcamentoController, "/orcamentos/*")
     context.mount(new HomeController, "/login/*")
-
+    
     context.initParameters("org.scalatra.cors.allowedOrigins") = "*"
-    context.initParameters("org.scalatra.cors.allowedHeaders") = "Content-Type"
-    
-    
   }
 
   override def destroy(context: ServletContext) {

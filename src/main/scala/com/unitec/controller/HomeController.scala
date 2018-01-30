@@ -21,13 +21,16 @@ class HomeController() extends ScalatraServlet with CorsSupport {
   implicit val formats = Serialization.formats(NoTypeHints)
   val logger = LoggerFactory.getLogger(getClass)
 
-  options("/*") {
-    response.setHeader("Access-Control-Allow-Headers", request.getHeader("Access-Control-Request-Headers"));
-    request.getHeader("Access-Control-Allow-Origin").+("*")
-    
+  before() {
+    response.setHeader("Access-Control-Allow-Origin", "*")
+    response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE")
+    response.setHeader("Access-Control-Max-Age", "3600")
+    response.setContentType("application/json")
   }
 
+
   post("/valida") {
+
     try {
       logger.info("Validando usuario 1!" + request.body)
       val usuario = read[Usuario](request.body)

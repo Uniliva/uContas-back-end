@@ -11,14 +11,10 @@ import com.unitec.model.Mensagens
 import org.scalatra.CorsSupport
 import org.slf4j.LoggerFactory
 
-class ComprasController extends ScalatraServlet with CorsSupport {
+class ComprasController extends ScalatraServlet {
   implicit val formats = Serialization.formats(NoTypeHints)
   val logger = LoggerFactory.getLogger(getClass)
   
-  options("/*") {
-  
-    response.setHeader("Access-Control-Allow-Headers", request.getHeader("Access-Control-Request-Headers"))
-  }
 
   get("/all") {
     write(ComprasService.getAll())
