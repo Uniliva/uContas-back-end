@@ -1,35 +1,43 @@
+
 package com.unitec.controller
 
 import org.json4s.DefaultFormats
-import org.json4s.Formats
-import org.json4s.NoTypeHints
-import org.json4s.jackson.JsonMethods.parse
-import org.json4s.jackson.Serialization
-import org.json4s.jvalue2extractable
-import org.json4s.native.Serialization.write
-import org.json4s.string2JsonInput
+import org.json4s._
+import org.json4s.jackson.JsonMethods._
+import org.json4s.native.Serialization.{ read, write }
+import org.json4s.native.Serialization
 import org.scalatra.CorsSupport
 import org.scalatra.ScalatraServlet
 import org.slf4j.LoggerFactory
-
-import com.unitec.dao._
 import com.unitec.service.MembroService
+import com.unitec.dao._
+import com.unitec.dao.MembroDao
+import com.unitec.dao.OrcamentoDao
+import com.unitec.dao.LocalDao
+import com.unitec.service.MembroService
+import com.unitec.dao.CompraDao
 
 class HomeController() extends ScalatraServlet with CorsSupport {
-  
-  protected implicit def executor = scala.concurrent.ExecutionContext.Implicits.global
-  val logger = LoggerFactory.getLogger(getClass)
-  protected implicit lazy val jsonFormats: Formats = DefaultFormats.withBigDecimal
   implicit val formats = Serialization.formats(NoTypeHints)
+  val logger = LoggerFactory.getLogger(getClass)
 
   options("/*") {
     response.setHeader("Access-Control-Allow-Headers", request.getHeader("Access-Control-Request-Headers"));
+    request.getHeader("Access-Control-Allow-Origin").+("*")
+    
   }
 
   post("/valida") {
-    logger.info("Validando usuario!")
-    val usuario = parse(request.body).extract[Usuario]
-    write(usuario.copy(isValido = MembroService.isMembroValido(usuario)))
+    try {
+      logger.info("Validando usuario 1!" + request.body)
+      val usuario = read[Usuario](request.body)
+      val x = usuario.copy(isValido = MembroService.isMembroValido(usuario))
+      println(x)
+      write(x)
+    } catch {
+      case e: Exception => println(e)
+    }
+
   }
 
   get("/createTables") {

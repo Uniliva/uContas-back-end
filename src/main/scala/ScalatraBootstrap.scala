@@ -4,11 +4,7 @@ import org.scalatra._
 
 import javax.servlet.ServletContext
 import com.unitec.util.BaseUtil
-import com.unitec.controller.HomeController
-import com.unitec.controller.ComprasController
-import com.unitec.controller.LocalController
-import com.unitec.controller.MembroController
-import com.unitec.controller.OrcamentoController
+import com.unitec.controller._
 
 class ScalatraBootstrap extends LifeCycle {
 
@@ -17,8 +13,13 @@ class ScalatraBootstrap extends LifeCycle {
     context.mount(new ComprasController, "/compras/*")
     context.mount(new LocalController, "/locais/*")
     context.mount(new MembroController, "/membros/*")
-    context.mount(new OrcamentoController, "/orcamentos/*") 
+    context.mount(new OrcamentoController, "/orcamentos/*")
     context.mount(new HomeController, "/login/*")
+
+    context.initParameters("org.scalatra.cors.allowedOrigins") = "*"
+    context.initParameters("org.scalatra.cors.allowedHeaders") = "Content-Type"
+    
+    
   }
 
   override def destroy(context: ServletContext) {

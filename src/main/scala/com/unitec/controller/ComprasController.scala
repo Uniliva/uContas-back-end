@@ -16,7 +16,7 @@ class ComprasController extends ScalatraServlet with CorsSupport {
   val logger = LoggerFactory.getLogger(getClass)
   
   options("/*") {
-    logger.warn("------------ response -------------" + response)
+  
     response.setHeader("Access-Control-Allow-Headers", request.getHeader("Access-Control-Request-Headers"))
   }
 
