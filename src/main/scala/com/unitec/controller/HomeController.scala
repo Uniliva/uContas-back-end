@@ -16,6 +16,7 @@ import com.unitec.dao.OrcamentoDao
 import com.unitec.dao.LocalDao
 import com.unitec.service.MembroService
 import com.unitec.dao.CompraDao
+import com.unitec.model.Mensagens
 
 class HomeController() extends ScalatraServlet with CorsSupport {
   implicit val formats = Serialization.formats(NoTypeHints)
@@ -25,20 +26,17 @@ class HomeController() extends ScalatraServlet with CorsSupport {
     response.setHeader("Access-Control-Allow-Origin", "*")
     response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE")
     response.setHeader("Access-Control-Max-Age", "3600")
-    response.setContentType("application/json")
   }
 
 
   post("/valida") {
-
     try {
       logger.info("Validando usuario 1!" + request.body)
       val usuario = read[Usuario](request.body)
-      val x = usuario.copy(isValido = MembroService.isMembroValido(usuario))
-      println(x)
-      write(x)
+      write(usuario.copy(isValido = MembroService.isMembroValido(usuario)))
+    
     } catch {
-      case e: Exception => println(e)
+      case e: Exception => write(Mensagens("ERROR", "Erro ao fazer o login"))
     }
 
   }
