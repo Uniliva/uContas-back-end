@@ -9,7 +9,7 @@
 		extra-sbtVersion="1.0"
 		conf="provided"
 		confs="compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, pom, scala-tool"
-		date="20180124102919"/>
+		date="20180201154329"/>
 	<dependencies>
 		<module organisation="org.scala-sbt" name="sbt">
 			<revision name="1.0.2" status="release" pubdate="20170916164827" resolver="sbt-chain" artresolver="sbt-chain" homepage="https://github.com/sbt/sbt" downloaded="false" searched="false" default="false" conf="default, compile, runtime, default(compile), master" position="1">
@@ -653,9 +653,9 @@
 			</revision>
 		</module>
 		<module organisation="org.scala-sbt" name="io_2.12">
-			<revision name="1.0.0" status="release" pubdate="20170809200559" resolver="public" artresolver="public" evicted="latest-revision" evicted-reason="" homepage="https://github.com/sbt/io" downloaded="true" searched="true" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="-1">
+			<revision name="1.0.0" status="release" pubdate="20170809200559" resolver="sbt-chain" artresolver="sbt-chain" evicted="latest-revision" evicted-reason="" homepage="https://github.com/sbt/io" downloaded="false" searched="false" default="false" conf="compile, runtime(*), master(compile), runtime, compile(*), master" position="-1">
 				<license name="BSD New" url="https://github.com/sbt/sbt/blob/0.13/LICENSE"/>
-				<metadata-artifact status="successful" details="" size="3352" time="650" location="D:\Users\upereira\.ivy2\cache\org.scala-sbt\io_2.12\ivy-1.0.0.xml" searched="true" original-local-location="D:\Users\upereira\.ivy2\cache\org.scala-sbt\io_2.12\ivy-1.0.0.xml.original" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/scala-sbt/io_2.12/1.0.0/io_2.12-1.0.0.pom"/>
+				<metadata-artifact status="no" details="" size="3044" time="0" location="D:\Users\upereira\.ivy2\cache\org.scala-sbt\io_2.12\ivy-1.0.0.xml" searched="false" origin-is-local="false" origin-location="https://repo1.maven.org/maven2/org/scala-sbt/io_2.12/1.0.0/io_2.12-1.0.0.pom"/>
 				<evicted-by rev="1.0.1"/>
 				<caller organisation="org.scala-sbt" name="zinc-classfile_2.12" conf="compile, runtime" rev="1.0.0" rev-constraint-default="1.0.0" rev-constraint-dynamic="1.0.0" callerrev="1.0.1"/>
 				<caller organisation="org.scala-sbt" name="run_2.12" conf="compile, runtime" rev="1.0.1" rev-constraint-default="1.0.1" rev-constraint-dynamic="1.0.1" callerrev="1.0.2"/>
