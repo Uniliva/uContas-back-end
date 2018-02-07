@@ -48,7 +48,7 @@ class HomeController() extends ScalatraServlet with CorsSupport {
     OrcamentoDao.createTable()
     OrcamentoDao.createTableM()
     CompraDao.createTable()
-    "tabelas criadas"
+    MembroDao.criaMembro()
   }
 
 }

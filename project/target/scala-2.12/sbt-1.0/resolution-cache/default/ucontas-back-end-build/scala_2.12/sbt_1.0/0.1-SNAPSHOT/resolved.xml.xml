@@ -4,7 +4,7 @@
 		module="ucontas-back-end-build"
 		revision="0.1-SNAPSHOT"
 		status="integration"
-		publication="20180201154329"
+		publication="20180206165231"
 		e:sbtVersion="1.0" e:scalaVersion="2.12"
 	>
 		<description>
