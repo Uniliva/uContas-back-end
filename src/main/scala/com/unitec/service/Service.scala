@@ -5,7 +5,7 @@ import com.unitec.model.BaseTables
 import com.unitec.dao.GenericDao
 import com.unitec.model.BaseEntity
 
-class Services[T <: BaseEntity,D <: BaseTables[T]](dao: GenericDao[T,D]) {
+class Services[T <: BaseEntity,D <: BaseTables[T]](dao: GenericDao[T,D])  {
  
   def getAll(): List[T] = {
     dao.findAll()

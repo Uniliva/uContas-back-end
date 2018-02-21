@@ -9,9 +9,16 @@ import org.json4s.native.Serialization
 import org.slf4j.LoggerFactory
 import com.unitec.model.Mensagens
 import com.unitec.model.Membro.Membro
+import org.scalatra.MethodOverride
 
-class MembroController extends ScalatraServlet {
+class MembroController extends ScalatraServlet with MethodOverride {
   implicit val formats = Serialization.formats(NoTypeHints)
+  val logger = LoggerFactory.getLogger(getClass)
+  before() {
+    response.setHeader("Access-Control-Allow-Origin", "*")
+    response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
+    response.setHeader("Access-Control-Max-Age", "3600")
+  }
   get("/all") {
     write(MembroService.getAll())
   }
@@ -25,23 +32,38 @@ class MembroController extends ScalatraServlet {
   }
 
   post("/new") {
-    val membro = read[Membro](request.body)
-    val result = MembroService.save(membro)
-    if (result) write(Mensagens("INFO", "Membro Cadastrado com sucesso"))
-    else write(Mensagens("ERROR", "Erro ao cadastrar membro"))
+    logger.info("Criando membro")
+    try {
+      val membro = read[Membro](request.body)
+      val result = MembroService.save(membro)
+      if (result)
+        write(Mensagens("INFO", "Membro Cadastrado com sucesso"))
+      else halt(400)
+    } catch {
+      case e: Exception => halt(400)
+    }
   }
 
-  delete("/remove/:id") {
-    val id = params("id")
-    val result = MembroService.delete(id.toLong)
-    if (result) write(Mensagens("INFO", "Membro deletado com sucesso"))
-    else write(Mensagens("ERROR", "Erro ao deletar membro"))
+  get("/remove/:id") {
+    logger.info("Apagando membro")
+    try {
+      val id = params("id")
+      val result = MembroService.delete(id.toLong)
+      if (result) write(Mensagens("INFO", "Membro deletado com sucesso"))
+      else halt(400)
+    } catch {
+      case e: Exception => halt(400)
+    }
   }
 
   post("/update") {
-    val membro = read[Membro](request.body)
-    val result = MembroService.update(membro)
-    if (result) write(Mensagens("INFO", "Membro atualizado com sucesso"))
-    else write(Mensagens("ERROR", "Erro ao atualizar membro"))
+    try {
+      val membro = read[Membro](request.body)
+      val result = MembroService.update(membro)
+      if (result) write(Mensagens("INFO", "Membro atualizado com sucesso"))
+      else halt(400)
+    } catch {
+      case e: Exception => halt(400)
+    }
   }
 }
