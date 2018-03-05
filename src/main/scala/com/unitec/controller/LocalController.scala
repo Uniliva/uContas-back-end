@@ -13,11 +13,18 @@ import com.unitec.model.Mensagens
 
 class LocalController extends ScalatraServlet {
   implicit val formats = Serialization.formats(NoTypeHints)
+  val logger = LoggerFactory.getLogger(getClass)
+  before() {
+    response.setHeader("Access-Control-Allow-Origin", "*")
+    response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
+    response.setHeader("Access-Control-Max-Age", "3600")
+  }
   get("/all") {
     write(LocalService.getAll())
   }
 
   get("/busca/:id") {
+
     val id = params("id")
     LocalService.getPorId(id.toLong) match {
       case Some(e) => write(e)
@@ -26,23 +33,38 @@ class LocalController extends ScalatraServlet {
   }
 
   post("/new") {
-    val local = read[Local](request.body)
-    val result = LocalService.save(local)
-    if (result) write(Mensagens("INFO", "Local Cadastrado com sucesso"))
-    else write(Mensagens("ERROR", "Erro ao cadastrar local"))
+    logger.info("Criando local")
+    try {
+      val local = read[Local](request.body)
+      val result = LocalService.save(local)
+      if (result) write(Mensagens("INFO", "Local Cadastrado com sucesso"))
+      else halt(400)
+    } catch {
+      case e: Exception => halt(400)
+    }
   }
 
-  delete("/remove/:id") {
-    val id = params("id")
-    val result = LocalService.delete(id.toLong)
-    if (result) write(Mensagens("INFO", "Local deletado com sucesso"))
-    else write(Mensagens("ERROR", "Erro ao deletar Local"))
+  get("/remove/:id") {
+    logger.info("Apagando Local")
+    try {
+      val id = params("id")
+      val result = LocalService.delete(id.toLong)
+      if (result) write(Mensagens("INFO", "Local deletado com sucesso"))
+      else halt(400)
+    } catch {
+      case e: Exception => halt(400)
+    }
   }
 
   post("/update") {
-    val local = read[Local](request.body)
-    val result = LocalService.update(local)
-    if (result) write(Mensagens("INFO", "Local Atualizada com sucesso"))
-    else write(Mensagens("ERROR", "Erro ao atualizar local"))
+    try {
+      val local = read[Local](request.body)
+      println(local)
+      val result = LocalService.update(local)
+      if (result) write(Mensagens("INFO", "Local Atualizada com sucesso"))
+      else halt(400)
+    } catch {
+      case e: Exception => println(e.fillInStackTrace())
+    }
   }
 }
