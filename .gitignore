@@ -10,8 +10,7 @@ lib_managed/
 src_managed/
 project/boot/
 project/plugins/project/
-project/target/
-project/target
+project/target/*
 project/project/*
 
 # eclipse
@@ -30,3 +29,5 @@ org.scala-ide.sdt.update-site/site.xml`
 *.iws
 .idea
 /bin/
+/project
+project
